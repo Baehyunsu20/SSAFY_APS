@@ -11,11 +11,7 @@ public class Solution {
 			
 			int result = fac(n,m);
 			System.out.println("#"+t+" "+result);
-			
-			
-			
-			
-			
+	
 		}
 	}
 	static int fac(int n, int m) {
