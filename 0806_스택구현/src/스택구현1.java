@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 /**
- * 스택의 구현 : 
+ * 스택의 구현
  * push, pop, peek, empty(Full), top 구현
  * 
  * - push : 정수 X를 스택에 넣음
