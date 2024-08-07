@@ -25,7 +25,9 @@ public class Solution {
 		
 		while (!isEmpty()) {
 			String rItem = deQueue();
-			System.out.println(rItem);
+			String peek = Qpeek();
+			System.out.println(rItem+" peek : "+peek);
+//			System.out.println();
 		}//조건문이 만족할 때 까지 -> 비어있으면 무한루프 탈출
 		
 		//비어있는 큐.
@@ -73,6 +75,9 @@ public class Solution {
 	
 	//삭제할 원소 = Qpeek ; front +1의 인덱스 요소
 	static String Qpeek() {
+		if(isEmpty()) {
+			return null;
+		}
 		return queue[front +1];
 	}
 	
