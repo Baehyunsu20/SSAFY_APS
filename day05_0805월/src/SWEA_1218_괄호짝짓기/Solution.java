@@ -1,86 +1,128 @@
 package SWEA_1218_괄호짝짓기;
 import java.util.*;
-import j
 /**
  * 4종류의 괄호들의 짝이 맞는지 판단 
  * 여는 괄호와 닫는 괄호의 갯수가 같아도 짝이 맞게 같지않다면 유효 하지 않다 =0
  * 짝이 맞게 갯수도 맞아야함.
  * 그럼 stack을 4개를 만들어야하나?
  */
-
 public class Solution {
-	static Scanner sc = new Scanner(System.in);
-	static int top =-1;
-	static int mode =0;
-	//4종류의 괄호 :  '()', '[]', '{}', '<>'  : 순으로 first -> fourth
-	static List<Character> first = new ArrayList<>();
-	static List<Character> second = new ArrayList<>();
-	static List<Character> third = new ArrayList<>();
-	static List<Character> fourth = new ArrayList<>();
-	
+	static Scanner sc =new Scanner(System.in);
+	static List<Character> stack = new ArrayList<>();
 	
 	public static void main(String[] args) {
-		
 		for(int t=1; t<=10; t++) {
-			//총 괄호들의 갯수
-			int len = sc.nextInt();
-			String inputLine = sc.next();
+			//스택 초기화
+			stack = new ArrayList<>();
 			
-			for(int i=0; i<len; i++) {
-				char tmp = sc.next().charAt(i);
-				System.out.println(tmp);
-				if(tmp=='(' || tmp=='[' || tmp=='{' || tmp=='<') {
-					//열리는 괄호의 경우, push를 통해 배열에 넣기.
-					push(list, tmp);
-				}
-				else if(tmp=='(' || tmp=='[' || tmp=='{' || tmp=='<') {
-					//
-				}
-				else if(tmp=='(' || tmp=='[' || tmp=='{' || tmp=='<') {
-					//
-				}
-				else if(tmp=='(' || tmp=='[' || tmp=='{' || tmp=='<') {
-					//
-				}
-				else if(tmp=='(' || tmp=='[' || tmp=='{' || tmp=='<') {
-					//
-				}
-				else if(tmp=='(' || tmp=='[' || tmp=='{' || tmp=='<') {
-					//
-				}
-				else if(tmp=='(' || tmp=='[' || tmp=='{' || tmp=='<') {
-					//
-				}
-				//
-			}//순회를 마치고 배열이 차있으면 
-			if(top ==-1)mode=1;
+			//0인지 아닌지 : 0이면 유효X, 1이면 유효
+			int tf = 1;
 			
-			System.out.println("#"+t+" "+mode);
-
-			
+			//몇개의 문자인지 가져옴	
+			int num = sc.nextInt();
+			//모든 괄호를 일단 가져옴.
+			String input = sc.next();
+			for(int time=0; time <num; time++) {
+				//앞에서부터 차근차근 가져옴.
+				char tmp = input.charAt(time);
+//				System.out.println("tmp : "+tmp);
+				//인풋을 받아오고, 닫는 괄호가 나올 때는, top의 괄호와 맞아야함.
+				if(tmp=='{' || tmp=='[' || tmp=='(' || tmp=='<') {
+					//여는 괄호가 나오면 stack에 쌓아둠.
+					push(tmp);
+//					System.out.println(time + "번째"+" push");
+				}
+				else if(tmp=='}') {
+					if(peek()=='{') {
+						pop();
+						tf=1;
+//						System.out.println(time + "번째"+"pop"+"tf : "+tf);
+					}
+					else {
+						//짝이 안 맞을 경우
+						tf=0;
+						break;
+						
+					}
+				}
+				else if(tmp==']') {
+					if(peek()=='[') {
+						pop();
+						tf=1;
+//						System.out.println(time + "번째"+" pop, "+"tf : "+tf);
+					}
+					else {
+						//짝이 안 맞을 경우
+						tf=0;
+						break;
+						
+					}
+					
+				}
+				else if(tmp==')') {
+					if(peek()=='(') {
+						pop();
+						tf=1;
+//						System.out.println(time + "번째 "+"pop"+"tf : "+tf);
+					}
+					else {
+						//짝이 안 맞을 경우
+						tf=0;
+						break;
+						
+					}
+					
+				}
+				else if(tmp=='>') {//나머지 ">"
+//					System.out.println("> 들어옴");
+					if(peek()=='<') {
+						pop();
+						tf=1;
+//						System.out.println(time + "번째 "+"pop"+"tf : "+tf);
+					}
+					else {
+						//짝이 안 맞을 경우
+						tf=0;
+						break;
+						
+					}
+				}
+				else {
+					System.out.println("괄호가 아닌 것이 들어왔습니다.");
+					tf=0;
+				}
+				
+				
+			}//전체 배열을 다 확인 = for문 완료
+			System.out.println("#"+t+" "+tf);
 		}
-		sc.close();
-	}
-	
-	static boolean isEmpty(List<Character> list) {
-		return list.isEmpty();
+		
 		
 	}
 	
-	private static void push(List<Character> list, char tmp) {
-		list.add(tmp);
+	static boolean isEmpty() {
+		return stack.isEmpty();
 	}
+	
 
-	static char pop(List<Character> list) {
-		if(isEmpty(list)) {
-			//비어있으면
-			System.out.println("스택이 비어있습니다.");
+	private static char pop() {
+		if(isEmpty()) {
 			return 0;
 		}
-		char peek = list.get(list.size()-1);
-		list.remove(peek);
-		return peek;
+		int top = stack.size()-1;
+		char res = stack.get(top);
+		//동적배열에서 아예 삭제
+		stack.remove(top);
+		
+		return res;
 	}
-	
+
+	private static char peek() {
+		return stack.get(stack.size()-1);
+	}
+
+	private static void push(char tmp) {
+		stack.add(tmp);
+	}
 
 }
