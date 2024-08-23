@@ -1,17 +1,6 @@
 package 보물상자비밀번호;
 import java.util.*;
 import java.io.*;
-/**
- * 1, B, 3,/  B, 3, B,/  8, 1, F,/ 7, 5, E
- * 
- * 1,/ B, 3, B,/ 3, B, 8,/ 1, F, 7,/ 5, E
- * 
- * 1, B,/ 3, B, 3,/ B, 8, 1,/ F, 7, 5,/ E
- * 
- *아래서부터는 같음.
- * 
- * 1, B, 3, /B, 3, B,/ 8, 1, F, /7, 5, E
- */
 
 public class Solution {
 //	static Stack<Character> stack = new Stack<>();
