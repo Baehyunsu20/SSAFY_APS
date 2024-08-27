@@ -1,13 +1,36 @@
 package SWEA_1859_백만장자_프로젝트;
+import java.util.*;
+import java.io.*;
+/**
+ * 뒤에서부터 세는 방법은 따로함.
+ * 정통적인 방법을 고려 -> 앞에서부터 해보기
+ * 나의 문제 : 설계를 제대로 하지 않고 넘어감. 설계를 제대로 하는 방법은 뭘까? 자꾸 반복문의 생각이 꼬임
+ * 차근차근 생각해야할듯 -> 차분히 생각하기, 코드부터 쓰지 않기
+ * 
+ * ****** 백만장자 설계 시작 *****
+ * 
+ * N일을 알고 있음. -> N의 범위 : 2이상 백만 이하
+ * 
+ * 1) 가장 최댓값을 찾고, 그 최댓값의 위치 전까지는 계속 구매.
+ * 2) 그 최댓값의 다음 인덱스에서 또 최댓값을 찾고, 그 전 인덱스까지
+ *  
+ * 3) 재귀를 통해 현 max의 다음 idx를 입력받고, 그 이후부터의 최댓값을 다시 찾음
+ * 4) max를 찾으면 그 인덱스 전까지 : 이득 += (Max - 리스트값)
+ * 5) 재귀의 기저 조건 = 매서드에 들어온 Max의 i값이 배열의 끝자리 일때는 이
+ * 추가되는 전체 내용은 싸피다이어리에 기록.
+ * 
+ * 
+ */
 
 public class Solution {
+	static int sum = 0;
 	public static void main(String[] args) {
-//		System.out.println(Math.ceil(7/2));
+		Scanner sc = new Scanner(System.in);
+		int T = 
 		
-		double tmp = (double) 6 / 2;
-		int half = (int) (Math.ceil(tmp)-1);
 		
-		System.out.println(half);
+		
 	}
+
 
 }
