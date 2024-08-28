@@ -1,4 +1,4 @@
-package 분할정복;
+package 퀵정렬;
 
 public class Solution {
 
