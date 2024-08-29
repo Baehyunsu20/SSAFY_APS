@@ -1,8 +1,6 @@
 package SWEA_2806_N_Queen;
-
 import java.util.Scanner;
 /**
- *
  *
  * "방문체크"로 문제를 풀이할 수 있다.
 2
@@ -10,104 +8,62 @@ import java.util.Scanner;
 2
  */
 public class Solution {
-	//체스판 확인
-	static boolean[][] visit;
 	static int n;
+	static int[] QinRow;
 	static int cnt;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();
-		
 		for(int t=1; t<=T; t++) {
-			//테케마다 값 초기화.
-			n= sc.nextInt(); // 퀸의 갯수, 판의 크기
-			visit = new boolean[n][n]; //체스판
-			cnt=0; //cnt = 경우의 수 -> 계속 업데이트.
-			
-			//2차원 배열에서의 위치는 넣어줌.
-			recurr(0,0);
-			System.out.println("#"+t+" "+ cnt);
-		}
+			n = sc.nextInt();
+			//경우의 수 = cnt;
+			QinRow = new int[n];
+			cnt = 0;
+			//PutQ : 한줄에 Q를 놓는 →→방향.위치
+			PutQ(0);
+			System.out.println("#"+t+" "+cnt);
+		}	
 	}
 
-	private static void recurr(int i, int j) {
-		//n번의 반복문을 통해, 각 자리를 확인
+	public static void PutQ(int idx) {
+		//한줄에 Queen에 두는 위치 PutQ(0)=2 : 0번째 줄에서의 퀸의 인덱스
 		
-		//가장 마지막 인덱스에 도달하고 난 후,  퀸의 위치가 제대로 되었는지 확인(possible)
-		if(i>=n && j >=n) {
-			//n*n에서의 n의 조합.
-			if(possible(visit)) {
-				//퀸이 가능한 상황일때만 cnt를 올려줌.
-				cnt++;
-			}
+		//기저조건 : 마지막줄까지 다 뒀을 경우
+		if(idx==n) {
+			//n=4가 들어온 경우 -> idx=4면 인덱스 아웃
+			//마지막까지 감 -> 경우의 수 카운트
+			cnt++;
 			return;
 		}
 		
-		//재귀 부분
-		for(int k=0; k<n; k++) {
-			for(int l=0; l<n; l++) {
-				//이미 자리가 잡혔다면, 스킵
-				if(visit[i][j]) continue;
-				visit[i][j] = true;
-				//바뀔 수 있는 모든 경우를 고려. 
-				recurr(i+1, j);
-				recurr(i+1, j+1);
-				recurr(i, j+1);
-				visit[i][j] = false;
+		//재귀조건 : 마지막줄에 도달하지 않았으면 옆으로 확인시작.
+		for(int cidx=0; cidx<n; cidx++) {
+			//→→방향 위치 : cidx확인
+			//idx번째 줄에서 cidx위치에 queen이 올 수 있는지 확인.(열 방향 확인 & 대각선 확인)
+			if(possible(idx, cidx)) {
+				QinRow[idx] = cidx;
+				PutQ(idx+1);
 			}
-		}
-
+		}	
 	}
 
-	private static boolean possible(boolean[][] visit) {
-		//행, 열, 대각선 확인
-		//행 확인
-		outR:
-		for(int i=0; i<n; i++) {
-			int tcnt=0;
-			for(int j=0; j<n; j++) {
-				if(visit[i][j]) {
-					tcnt++;
-				}
-				if(tcnt>1)break outR;
-				
-			}
+	public static boolean possible(int idx, int cidx) {
+		// 체스판에서의 위치 : (idx, cidx)에 퀸을 놓을 수 있는지 확인
+		//열 확인 = 요소 값이 같은지 확인 , 대각선 확인 : 좌표의 각 X, Y의 차이가 같으면 = 대각선임.
+		//전의 퀸 위치와 확인 : QinRow의 모든 요소 탐색
+		for(int i=0; i<idx; i++) {
+			//현재 idx 윗줄의 Queen을 고려해줌.
 			
+			//1. 열방향 확인 QinRow의 요소값이 값으면 다음으로
+			if(QinRow[i] == cidx) return false;
+			//2. 대각선 확인 : x값들과 y값들의 차이 
+			//직전 퀸의 값 : (i, QinRow[i])
+			//비교하고싶은 값 : (idx, cidx)
+			if(Math.abs(i-idx) == Math.abs(QinRow[i] - cidx)) return false;
 		}
-		
-
-		//열 확인
-		outC:
-			for(int i=0; i<n; i++) {
-				int tcnt=0;
-				for(int j=0; j<n; j++) {
-					if(visit[j][i]) {
-						tcnt++;
-					}
-					if(tcnt>1)break outC;
-					
-				}
-				
-			}
-		
-		
-		
-		//대각선 확인
-		out:
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<n; j++) {
-				if(visit[i][j]) {
-					// true일때의 대각선 확인
-					
-				}
-			}
-		}
-		
-		
-		return false;
+		return true;
 	}
-
 
 
 }
