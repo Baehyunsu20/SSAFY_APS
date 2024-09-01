@@ -17,7 +17,7 @@ public class prac {
 	}
 
 	private static void quick(int left, int right) {
-		//교차하기 전까지 계속.
+		//교차하기 전까지 계속. 등호 안ㄷㄹ어감
 		if(left < right) {
 			int pivot = partition(left, right);
 			quick(left, pivot-1);

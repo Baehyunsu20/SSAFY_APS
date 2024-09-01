@@ -51,8 +51,7 @@ public class prac2 {
 				else {
 					perm(i+1, kscore, iscore+score);
 				}
-				sel[k] = false ;
-				
+				sel[k] = false;
 			}
 		}
 		
