@@ -1,4 +1,5 @@
 package 퀵정렬;
+//호어파티션
 
 import java.util.Arrays;
 
@@ -38,6 +39,7 @@ public class prac {
 			while(arr[r]>pivot) r--;
 			//값이 멈췄다면, 이제 자리를 바꿔야함
 			
+			//자리를 바꾸는건 등호 포함 안함.
 			if(l<r) {
 				int tmp= arr[r];
 				arr[r] = arr[l];
