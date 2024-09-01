@@ -1,5 +1,6 @@
 package SWEA_2817_부분수열의_합;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  * n개의 수열을 받고, 합이 k가 되는 경우의 수 구하기
@@ -11,6 +12,7 @@ public class Solution {
 	static int k;
 	static int[] list;
 	static boolean[] sel;
+	
 	
 	static int cnt;
 	
