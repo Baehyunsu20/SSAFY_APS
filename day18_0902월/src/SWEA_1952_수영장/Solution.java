@@ -40,6 +40,7 @@ class Solution{
 			 //1일권, 1달권, 3달권으로 나눠서 각자 재귀
 			 recurr(month+1, total+day[month]*price[0]);
 			 recurr(month+1, total+price[1]);
+			 //중간에 0이 있어도 일단 고려하는 방법
 			 recurr(month+3, total+price[2]); 
 		 }
 		 else {
