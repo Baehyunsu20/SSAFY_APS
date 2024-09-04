@@ -18,7 +18,7 @@ public class 호어 {
 	private static void quicksort(int left, int right) {
 		
 		if(left<right) {
-			int pivot = partition(left, right);
+//			int pivot = partition(left, right);
 			
 			
 		}
